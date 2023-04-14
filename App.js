@@ -1,22 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { Btn } from './src/components/Button';
-import { Timer } from './src/components/Timer';
-
-
 
 export default function App() {
   return (
     <View style={styles.container}>
-
-      <Text style={styles.text}>
-        Time to Work
-      </Text>
-
-      <Btn />
-      
-    <Timer />
-
+      <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -29,8 +17,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  text: {
-    color:"#EB423F",
-    fontSize: 20
-  }
 });
