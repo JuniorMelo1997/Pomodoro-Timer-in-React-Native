@@ -25,7 +25,7 @@ const style = StyleSheet.create({
     },
     buttonRestart:{        
       backgroundColor: '#f3f3f3',
-      height: 100,
+      height: 70,
       width: 250,
       borderRadius: 10,
       alignItems: 'center',

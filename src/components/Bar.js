@@ -1,5 +1,3 @@
-/* Create a load bar component */
-
 import { StyleSheet, View } from "react-native";
 
 export const Bar = ({counter, initial}) => {
