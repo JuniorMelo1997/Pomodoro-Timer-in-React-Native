@@ -1,10 +1,12 @@
 import { StyleSheet, View, Text } from "react-native"
 
-export const Display = ()=>{
+export const Display = ({counter})=>{
+    const min = String(Math.floor(counter/60) < 10 ? "0" + Math.floor(counter/60) : Math.floor(counter/60))
+    const sec = String((counter - 60*min) < 10 ? "0" + (counter - 60*min) : (counter - 60*min));
     return (
         <View style={style.container}>
             <Text style={style.text}> 
-                00:00
+                {min}:{sec}
             </Text>
         </View>
     )

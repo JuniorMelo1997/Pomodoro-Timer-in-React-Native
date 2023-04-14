@@ -1,19 +1,21 @@
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native"
+import { StyleSheet, Text, TouchableOpacity } from "react-native"
 
-export const Btn = ()=>{
+export const Btn = ({action, type, message, disabled})=>{
     return (
-        <View style={style.container}>
-            <TouchableOpacity>
-                <Text style={style.text}>
-                    Começar
-                </Text>
-            </TouchableOpacity>
-        </View>
+        <TouchableOpacity 
+            activeOpacity={0.8} 
+            onPress={action} 
+            style={type === "start" ? style.buttonStartPause : style.buttonRestart}
+            disabled={disabled} >
+            <Text style={type === "start" ? style.textStartPause : disabled ? style.textRestartDiabled  : style.textRestart}>
+                {message}
+            </Text>
+        </TouchableOpacity>
     )
 }
 
 const style = StyleSheet.create({
-    container: {
+    buttonStartPause: {
       backgroundColor: '#2c2c2c',
       height: 100,
       width: 250,
@@ -21,8 +23,25 @@ const style = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-    text: {
+    buttonRestart:{        
+      backgroundColor: '#f3f3f3',
+      height: 100,
+      width: 250,
+      borderRadius: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    textStartPause: {
       color:"#f3f3f3",
       fontSize: 40
+    },
+    textRestart:{
+        color: "#E64A19",
+        fontSize: 40
+    },
+    textRestartDiabled:{         
+        opacity: 0,
+        height: 0,
+        width: 0
     }
   });
