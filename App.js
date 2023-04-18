@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { Display } from './src/components/Display';
 import { Btn } from './src/components/Button';
 import { Bar } from './src/components/Bar';
@@ -8,8 +8,6 @@ import { Modal } from './src/components/Modal';
 
 export default function App() {
   const [initial, setInitial] = useState(25*60);
-  const [restTime, setRestTime] = useState(2);
-  const [isResting, setIsResting] = useState(false);
   const [settingTime, setSettingTime] = useState(false);
   const [counter, setCounter] = useState(initial);
   const [isCounting, setIsCounting] = useState(false);
@@ -31,23 +29,13 @@ export default function App() {
     setSettingTime(!settingTime);
   }
 
-  const handleIsCounting = ()=>{
-    if(!isCounting && counter === 0 && !isResting){
-      startRestTime();
-      setIsResting(!isResting);
-    }    
-
-    if(!isCounting && counter === 0 && isResting){
+  const handleIsCounting = ()=>{    
+    if(!isCounting && counter === 0){
       restart();
-      setIsResting(!isResting);
     }
 
     setIsCounting(!isCounting);
     stop();
-  }
-
-  const startRestTime = ()=>{
-    setCounter(restTime);
   }
 
   const changeCounter = ()=>{
@@ -56,7 +44,7 @@ export default function App() {
     }
   }
 
-  const stop = ()=>{    
+  const stop = ()=>{           
     clearTimeout(timeCounter);
   }
   
@@ -65,8 +53,6 @@ export default function App() {
   }
 
   useEffect(()=>{
-    console.log(counter, isCounting);
-    
     if(counter === 0){
       setIsCounting(false);
     }
@@ -109,5 +95,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#f3f3f3',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
 });
