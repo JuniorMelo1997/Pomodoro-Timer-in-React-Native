@@ -3,7 +3,7 @@ import { Btn } from "./Button";
 import { useState } from "react";
 
 export const Modal = ({action, type, message, handleInitial}) => {
-    const [minutes, setMinutes] = useState(25*60);
+    const [minutes, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
 
     const handleInitialValue = (time)=>{
@@ -28,7 +28,7 @@ export const Modal = ({action, type, message, handleInitial}) => {
         </Text>
 
         <View style={style.container} >
-            <TextInput keyboardType="numeric" style={style.text} placeholder="25" onChangeText={min => {
+            <TextInput keyboardType="numeric" style={style.text} placeholder="00" onChangeText={min => {
                 handleInitialValue({
                     type: "minute",
                     time: min
