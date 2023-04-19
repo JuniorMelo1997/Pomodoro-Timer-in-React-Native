@@ -96,7 +96,7 @@ export default function App() {
   if(!settingTime){
     return (
       <View style={styles.container}>
-        <Bar counter={counter} initial={initial} />
+        <Bar counter={counter} initial={isResting ? restTime : initial} />
         <Text style={styles.title}>
           {isResting ? "Calma! Hora de descansar" : "Vamos lá! Hora de trabalhar" }
         </Text>
