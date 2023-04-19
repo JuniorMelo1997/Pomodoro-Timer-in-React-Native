@@ -33,7 +33,8 @@ const style = StyleSheet.create({
     },
     textStartPause: {
       color:"#f3f3f3",
-      fontSize: 40
+      fontSize: 35,
+      textAlign: "center"
     },
     textRestart:{
         color: "#E64A19",

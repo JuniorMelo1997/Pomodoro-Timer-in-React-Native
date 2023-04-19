@@ -8,9 +8,13 @@ import { Modal } from './src/components/Modal';
 
 export default function App() {
   const [initial, setInitial] = useState(25*60);
+  const [isResting, setIsResting] = useState(false);
+  const [restTime, setRestTime] = useState(10);
   const [settingTime, setSettingTime] = useState(false);
   const [counter, setCounter] = useState(initial);
   const [isCounting, setIsCounting] = useState(false);
+
+  console.log(counter, isCounting, isResting);
 
   const timeCounter = setTimeout(()=>{
     changeCounter();
@@ -48,13 +52,26 @@ export default function App() {
     clearTimeout(timeCounter);
   }
   
+  const reset = ()=>{
+    setIsResting(false);    
+    setCounter(initial);
+  }
+
   const restart = ()=>{
-    setCounter(initial)
+    if(isResting){
+      setCounter(restTime)
+    } else{        
+      setCounter(initial)
+    }
   }
 
   useEffect(()=>{
     if(counter === 0){
       setIsCounting(false);
+    }
+
+    if(counter === 0 && isCounting){      
+      setIsResting(resting => !resting);
     }
 
     if(isCounting){
@@ -71,9 +88,12 @@ export default function App() {
     return (
       <View style={styles.container}>
         <Bar counter={counter} initial={initial} />
+        <Text style={styles.title}>
+          {isResting ? "Calma! Hora de descansar" : "Vamos lá! Hora de trabalhar" }
+        </Text>
         <Display counter={counter} />
-        <Btn action={handleIsCounting} type = "start" message={isCounting ? "Parar" : "Começar"} disabled={false} />
-        <Btn action={restart} type = "restart" message={"Resetar"} disabled = {isCounting ? true : false} />
+        <Btn action={handleIsCounting} type = "start" message={isResting && isCounting ? "Pausar Descanso" : isResting && !isCounting ? "Descansar" : isCounting ? "Parar" : "Começar"} disabled={false} />
+        <Btn action={reset} type = "restart" message={"Resetar"} disabled = {isCounting ? true : false} />
         <Btn action={handleSettingTime} type = "set" message={"Ajustar"} disabled = {isCounting ? true : false} />
         <StatusBar style="auto" />
       </View>
@@ -95,5 +115,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#f3f3f3',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  title:{        
+    color:"#2c2c2c",
+    fontSize: 25
   }
 });
