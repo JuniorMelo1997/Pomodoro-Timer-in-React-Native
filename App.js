@@ -9,7 +9,7 @@ import { Modal } from './src/components/Modal';
 export default function App() {
   const [initial, setInitial] = useState(25*60);
   const [isResting, setIsResting] = useState(false);
-  const [restTime, setRestTime] = useState(10);
+  const [restTime, setRestTime] = useState(5*60);
   const [settingTime, setSettingTime] = useState(false);
   const [counter, setCounter] = useState(initial);
   const [isCounting, setIsCounting] = useState(false);
@@ -20,12 +20,17 @@ export default function App() {
     changeCounter();
   }, 1000);
 
-  const handleInitial = (min, sec)=>{
+  const handleInitial = (min, sec, restMin, restSec)=>{
     /* min is already in seconds format (minutes*60). It cames in this format from the Modal component */
     
     if(min === 0 && sec === 0){  
     } else{      
       setInitial(min + sec);
+    }
+    
+    if(restMin === 0 && restSec === 0){  
+    } else{      
+      setRestTime(restMin + restSec);
     }
   }
 
@@ -81,8 +86,12 @@ export default function App() {
   }, [counter, isCounting])
 
   useEffect(()=>{
-    setCounter(initial);
-  }, [initial])
+    if(isResting){
+      setCounter(restTime);
+    } else{
+      setCounter(initial);
+    }
+  }, [initial, restTime])
 
   if(!settingTime){
     return (
